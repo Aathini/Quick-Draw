@@ -9,10 +9,15 @@ Sketch = quick_draw_data_set[random_no];
 console.log(quick_draw_data_set[random_no]);
 document.getElementById("S2BDrawn").innerHTML = "Sketch to be Drawn: " + Sketch;
 
+function preload() {
+    
+    trained_modal = ml5.imageClassifier('DoodleNet');
+}
 function setup() {
     canvas_var = createCanvas(200,200);
     canvas_var.center();
     background("white");
+    canvas_var.mouseReleased(compare_image);
 
 }
 function updateCanvas() {
@@ -29,6 +34,11 @@ function draw() {
         score += 1;
         document.getElementById("Score").innerHTML = "Score : " + score;
 
+    }
+    strokeWeight(13);
+    stroke(0);
+    if (mouseIsPressed) {
+        line(pmouseX, pmouseY, mouseX, mouseY);
     }
 }
 function check_sketch() {
